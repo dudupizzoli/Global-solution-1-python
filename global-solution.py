@@ -10,7 +10,7 @@ import random
 contas = [] #colocar email + senha (talvez nome)
 meus_alertas = ["Há uma nevasca perto de você. Procure um local seguro para se abrigar e busque mais orientações. - 29/05/2026", "Há um incêndio perto de você. Procure se manter longe do fogo e busque mais orientações. - 27/05/2026", "Há uma tempestade perto de você. Procure um local seguro para se abrigar e busque mais orientações. - 25/05/2026"]
 fav_locais = []
-alertas_brasil = ["Risco de 'super El Niño' faz Governo montar grupo de monitoramento. - 31/05/2026", "Chuvas e muitas nuvens sobre o litoral nordestino. - 30/05/2026", "Frio intenso volta a afetar as regiôes Sul e Sudeste do país, derrubando as temperaturas. - 27/05/2026"]
+alertas_brasil = ["Risco de 'super El Niño' faz Governo montar grupo de monitoramento. - 31/05/2026", "Chuvas e muitas nuvens sobre o litoral nordestino. - 30/05/2026", "Frio intenso volta a afetar as regiões Sul e Sudeste do país, derrubando as temperaturas. - 27/05/2026"]
 previsao_tempo = ["Hoje | Mín: 15° - Máx: 21° | Sol entre nuvens", "Segunda-feira | Mín: 13° - Máx: 21° | Sol entre nuvens", "Terça-feira | Mín: 12° - Máx: 20° | '45%' de chance de chuva", "Quarta-feira | Mín: 12° - Máx: 20° | Nublado", "Quinta-feira | Mín: 13° - Máx: 20° | Nublado", "Sexta-feira | Mín: 11° - Máx: 20° | '45%' de chance de chuva", "Sábado | Mín: 10° - Máx: 21° | Sol", "Domingo | Mín: 10° - Máx: 22° | Nublado"]
 historico_locais = []
 
@@ -128,26 +128,26 @@ while opcao != 0:
             adicionar_nm = int(input("Deseja adicionar um nome para o local? Digite 1 para sim e 2 para não: "))
             if adicionar_nm == 1:
                 nome = input("Digite o nome que deseja colocar no local: ").strip()
-                lugar_com_nome = {"lugar": lugar_fav, "nome": nome}
+                lugar_com_nome = {"Lugar": lugar_fav, "Nome": nome}
                 favoritar_local(lugar_com_nome)
             else:
-                lugar_sem_nome = {"lugar": lugar_fav}
+                lugar_sem_nome = {"Lugar": lugar_fav}
                 favoritar_local(lugar_sem_nome)
 
         case 6:
             mostrar_listas(fav_locais) #perguntar pra prof sobre a formatação daqui
 
         case 7:
-            print("A Geo Rocket possui 2 planos:")
-            print("Plano Básico: O plano básico concede ao usuário acesso a todos os serviços básicos da Geo Rocket. O usuário pode procurar locais, receber alertas, consultar uma previsão precisa do tempo, entre outras funcionalidades.")
-            print("Plano Agro: O plano Agro é voltado principalmente a usuários com propriedades agrícolas que desejam usufruir do monitoramento da Geo Rocket de forma mais avançada. Com este plano, a Geo Rocket irá monitorar a propriedade do assinante, notificando-o de eventos climáticos, alterações na vegetação, incêndios, alagamentos, entre outros acontecimentos. O preço da assinatura é proporcional ao tamanho da propriedade.")
+            print("\nA Geo Rocket possui 2 planos:")
+            print("\nPlano Básico: O plano básico concede ao usuário acesso a todos os serviços básicos da Geo Rocket. O usuário pode procurar locais, receber alertas, consultar uma previsão precisa do tempo, entre outras funcionalidades.")
+            print("\nPlano Agro: O plano Agro é voltado principalmente a usuários com propriedades agrícolas que desejam usufruir do monitoramento da Geo Rocket de forma mais avançada. Com este plano, a Geo Rocket irá monitorar a propriedade do assinante, notificando-o de eventos climáticos, alterações na vegetação, incêndios, alagamentos, entre outros acontecimentos. O preço da assinatura é proporcional ao tamanho da propriedade.")
 
-            assinar_plano = int(input("Deseja assinar o plano Agro? Digite 1 para sim e 2 para não: "))
+            assinar_plano = int(input("\nDeseja assinar o plano Agro? Digite 1 para sim e 2 para não: "))
             if assinar_plano == 1:
                 print("Perfeito! Para prosseguir, insira os dados requisitados abaixo: ")
 
                 hectare = float(input("Sua propriedade possui quantos hectares? "))
-                subsistencia = int(input("Sua propriedade possui qual propósito? Digite 1 para Subsistência e 2 para Comercial:"))
+                subsistencia = int(input("Sua propriedade possui qual propósito? Digite 1 para Subsistência e 2 para Comercial: "))
                 endereco = input("Digite o endereço de sua propriedade: ").strip()
 
                 valor = assinatura(hectare, subsistencia)
@@ -177,10 +177,10 @@ while opcao != 0:
             mostrar_listas(previsao_tempo)
 
         case 10:
-            print("Esta é a busca de locais. Aqui, você consegue procurar por um local no Brasil e verificar sua situação em tempo real, podendo ver como está o tempoe  se há algum evento como enchentes ou incêndios.")
+            print("Esta é a busca de locais. Aqui, você consegue procurar por um local no Brasil e verificar sua situação em tempo real, podendo ver como está o tempo e  se há algum evento como enchentes ou incêndios.")
             lugar_busca = input("Digite o endereço do local que você deseja buscar: ").strip()
             situacao = alerta_busca_locais()
-            print(lugar_busca + "-" + situacao)
+            print(lugar_busca + " - " + situacao)
             lugar_e_situacao = {"Lugar buscado": lugar_busca, "Situação": situacao}
             adicionar_ao_historico(lugar_e_situacao)
 
