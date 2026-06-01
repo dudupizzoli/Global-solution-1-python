@@ -14,6 +14,10 @@ alertas_brasil = ["Risco de 'super El Niño' faz Governo montar grupo de monitor
 previsao_tempo = ["Hoje | Mín: 15° - Máx: 21° | Sol entre nuvens", "Segunda-feira | Mín: 13° - Máx: 21° | Sol entre nuvens", "Terça-feira | Mín: 12° - Máx: 20° | '45%' de chance de chuva", "Quarta-feira | Mín: 12° - Máx: 20° | Nublado", "Quinta-feira | Mín: 13° - Máx: 20° | Nublado", "Sexta-feira | Mín: 11° - Máx: 20° | '45%' de chance de chuva", "Sábado | Mín: 10° - Máx: 21° | Sol", "Domingo | Mín: 10° - Máx: 22° | Nublado"]
 historico_locais = []
 
+def cadastrar(conta): #Função responsável por realizar o cadastro do usuário
+    contas.append(conta)
+    print("Parabéns, Sua conta foi cadastrada com sucesso!")
+
 def favoritar_local(local): #Função com o objetivo de favoritar o local inserido pelo usuário. A função também realiza uma busca para, caso o local inserido pelo usuário já esteja favoritado, não duplicá-lo na lista.
     if local in fav_locais:
         print("Não foi possível favoritar esse local pois ele já está favoritado.")
@@ -101,8 +105,8 @@ while opcao != 0:
             email = input("Digite seu email: ").strip()
             senha = input("Digite sua senha: ").strip()
             user_conta = {"username": username, "email": email, "senha": senha}
-            contas.append(user_conta)
-            print("Parabéns, Sua conta foi cadastrada com sucesso!")
+            cadastrar(user_conta)
+          
 
         case 3:
             print("Para logar em sua conta, insira os dados solicitados abaixo: ")
