@@ -1,20 +1,13 @@
-#tem que usar: if, elif, else e match case - funções (def) - listas (espero que tuplas e string não)- while e for
-#menu ja ta feito, fazer o sobre, cinco itens no minimo e quatro funcionais já vou passar, formatar dados e deixar a leitura agradável, usabilidade
-#ok perguntar sobre a manipulação de listas
-#fzr no mínimo 3 funções. usar parâmetros e retorno
-#funções já vão ter cadastro, busca, validação e TALVEZ análise de dados, mas ver um jeito de mexer com números
-#funções tem que ter comentários explicando
-#isso é obrigatório: validar dados inseridos pelo usuário - exibir relatórios e análises produzidas pelo sistema.
 import random
 
-contas = [] #colocar email + senha (talvez nome)
+contas = [] 
 meus_alertas = ["Há uma nevasca perto de você. Procure um local seguro para se abrigar e busque mais orientações. - 29/05/2026", "Há um incêndio perto de você. Procure se manter longe do fogo e busque mais orientações. - 27/05/2026", "Há uma tempestade perto de você. Procure um local seguro para se abrigar e busque mais orientações. - 25/05/2026"]
 fav_locais = []
 alertas_brasil = ["Risco de 'super El Niño' faz Governo montar grupo de monitoramento. - 31/05/2026", "Chuvas e muitas nuvens sobre o litoral nordestino. - 30/05/2026", "Frio intenso volta a afetar as regiões Sul e Sudeste do país, derrubando as temperaturas. - 27/05/2026"]
 previsao_tempo = ["Hoje | Mín: 15° - Máx: 21° | Sol entre nuvens", "Segunda-feira | Mín: 13° - Máx: 21° | Sol entre nuvens", "Terça-feira | Mín: 12° - Máx: 20° | '45%' de chance de chuva", "Quarta-feira | Mín: 12° - Máx: 20° | Nublado", "Quinta-feira | Mín: 13° - Máx: 20° | Nublado", "Sexta-feira | Mín: 11° - Máx: 20° | '45%' de chance de chuva", "Sábado | Mín: 10° - Máx: 21° | Sol", "Domingo | Mín: 10° - Máx: 22° | Nublado"]
 historico_locais = []
 
-def cadastrar(conta): #Função responsável por realizar o cadastro do usuário
+def cadastrar(conta): #Função responsável por realizar o cadastro do usuário.
     contas.append(conta)
     print("Parabéns, Sua conta foi cadastrada com sucesso!")
 
@@ -74,19 +67,20 @@ conta_logada = None
 
 while opcao != 0:
     print("\n===== Menu Geo Rocket =====")
-    print("1 - Sobre a Geo Rocket.") # máximo 5 linhas
-    print("2 - Cadastrar uma nova conta.") # fzr com função
-    print("3 - Logar em uma conta.") #talvez eu faça isso - colocar instruções detalhadas pro usuário - fzr com função
+    print("1 - Sobre a Geo Rocket.") 
+    print("2 - Cadastrar uma nova conta.") 
+    print("3 - Logar em uma conta.") 
     print("4 - Ver a conta logada.")
     print("5 - Conferir meus alertas.")
-    print("6 - Adicionar um local aos meus favoritos.") #talvez fazer com função
+    print("6 - Adicionar um local aos meus favoritos.") 
     print("7 - Conferir meus locais favoritos.")
-    print("8 - Ver planos.") #fazer opção para assinar o outro plano ||| perguntar sobre as coisas de pagamento e se precisa add novas coisas
+    print("8 - Ver planos.") 
     print("9 - Conferir alertas do Brasil.")
     print("10 - Ver previsão do tempo.")
-    print("11 - Buscar um local.") # fazer com função (talvez criarv um sistema que gere números aleatórios e com base nesses números vai ser um alerta) ||| talvez eu tenha problemas em manter o local ligado ao alerta
+    print("11 - Buscar um local.") 
     print("12 - Ver histórico de locais buscados.")
-    print("13 - Ver meu local.") #fazer isso é uma possibilidade
+    print("13 - Ver meu local.") 
+    print("14 - Conferir contas cadastradas.")
     print("0 - Sair.")
 
     try:
@@ -213,6 +207,13 @@ while opcao != 0:
 
         case 13:
             print("Atualmente, você se encontra em: Avenida Paulista - Bela Vista, São Paulo - SP")
+
+        case 14:
+            if len(contas) == 0:
+                print("Nenhuma conta foi cadastrada.")
+            else:
+                for conta in contas:
+                    print("Nome de usuário:", conta['username'], "-", "Email:", conta['email'])
 
         case 0:
             print("Encerrando sistema...")
