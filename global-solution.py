@@ -66,21 +66,23 @@ def adicionar_ao_historico(lugar_e_alerta): #Função responsável por adicionar
 
 
 opcao = -1
+conta_logada = None
 
 while opcao != 0:
     print("\n===== Menu Geo Rocket =====")
     print("1 - Sobre a Geo Rocket.") # máximo 5 linhas
     print("2 - Cadastrar uma nova conta.") # fzr com função
     print("3 - Logar em uma conta.") #talvez eu faça isso - colocar instruções detalhadas pro usuário - fzr com função
-    print("4 - Conferir meus alertas.")
-    print("5 - Adicionar um local aos meus favoritos.") #talvez fazer com função
-    print("6 - Conferir meus locais favoritos.")
-    print("7 - Ver planos.") #fazer opção para assinar o outro plano ||| perguntar sobre as coisas de pagamento e se precisa add novas coisas
-    print("8 - Conferir alertas do Brasil.")
-    print("9 - Ver previsão do tempo.")
-    print("10 - Buscar um local.") # fazer com função (talvez criarv um sistema que gere números aleatórios e com base nesses números vai ser um alerta) ||| talvez eu tenha problemas em manter o local ligado ao alerta
-    print("11 - Ver histórico de locais buscados.")
-    print("12 - Ver meu local.") #fazer isso é uma possibilidade
+    print("4 - Ver a conta logada.")
+    print("5 - Conferir meus alertas.")
+    print("6 - Adicionar um local aos meus favoritos.") #talvez fazer com função
+    print("7 - Conferir meus locais favoritos.")
+    print("8 - Ver planos.") #fazer opção para assinar o outro plano ||| perguntar sobre as coisas de pagamento e se precisa add novas coisas
+    print("9 - Conferir alertas do Brasil.")
+    print("10 - Ver previsão do tempo.")
+    print("11 - Buscar um local.") # fazer com função (talvez criarv um sistema que gere números aleatórios e com base nesses números vai ser um alerta) ||| talvez eu tenha problemas em manter o local ligado ao alerta
+    print("12 - Ver histórico de locais buscados.")
+    print("13 - Ver meu local.") #fazer isso é uma possibilidade
     print("0 - Sair.")
 
     try:
@@ -113,16 +115,23 @@ while opcao != 0:
             for conta in contas:
                 if conta["email"] == email_login and conta["senha"] == senha_login:
                     logado = True
+                    conta_logada = conta
                     print("Parabéns, você fez login com sucesso!")
                     break  
 
             if not logado:
                     print("Houve um erro, seu email ou senha estão errados.")
 
-        case 4: 
+        case 4:
+            if conta_logada:
+                print("Conta logada: ", conta_logada["username"], " - ", conta_logada["email"])            
+            else:
+                print("Nenhuma conta está logada.")
+
+        case 5: 
             mostrar_listas(meus_alertas)
 
-        case 5:
+        case 6:
             print("Para favoritar um local, insira seu endereço abaixo. Caso deseje, pode colocar um nome para identificar o local")
             lugar_fav = input("Digite o endereço do local que você deseja favoritar: ").strip()
             adicionar_nm = int(input("Deseja adicionar um nome para o local? Digite 1 para sim e 2 para não: "))
@@ -134,10 +143,17 @@ while opcao != 0:
                 lugar_sem_nome = {"Lugar": lugar_fav}
                 favoritar_local(lugar_sem_nome)
 
-        case 6:
-            mostrar_listas(fav_locais) #perguntar pra prof sobre a formatação daqui
-
         case 7:
+            if len(fav_locais) == 0:
+                print("Não há nenhum local favoritado.")
+            else:
+                for lug in fav_locais:
+                    if "Nome" in lug:
+                        print("Lugar:", lug['Lugar'], "-", lug['Nome'])
+                    else:
+                        print("Lugar:", lug["Lugar"])
+
+        case 8:
             print("\nA Geo Rocket possui 2 planos:")
             print("\nPlano Básico: O plano básico concede ao usuário acesso a todos os serviços básicos da Geo Rocket. O usuário pode procurar locais, receber alertas, consultar uma previsão precisa do tempo, entre outras funcionalidades.")
             print("\nPlano Agro: O plano Agro é voltado principalmente a usuários com propriedades agrícolas que desejam usufruir do monitoramento da Geo Rocket de forma mais avançada. Com este plano, a Geo Rocket irá monitorar a propriedade do assinante, notificando-o de eventos climáticos, alterações na vegetação, incêndios, alagamentos, entre outros acontecimentos. O preço da assinatura é proporcional ao tamanho da propriedade.")
@@ -154,7 +170,7 @@ while opcao != 0:
 
                 if valor is not None:
                     print("\n===== RESUMO DA ASSINATURA =====")
-                    print(f"Endereço: {endereco}")
+                    print("Endereço: ", endereco)
                     print(f"Área: {hectare} hectares")
                     print(f"Valor mensal: R${valor:.2f}")
                     print("==================================\n")
@@ -170,24 +186,28 @@ while opcao != 0:
             else:
                 print("Ok, retornando para o menu.")
 
-        case 8:
+        case 9:
             mostrar_listas(alertas_brasil)
 
-        case 9:
+        case 10:
             mostrar_listas(previsao_tempo)
 
-        case 10:
+        case 11:
             print("Esta é a busca de locais. Aqui, você consegue procurar por um local no Brasil e verificar sua situação em tempo real, podendo ver como está o tempo e  se há algum evento como enchentes ou incêndios.")
             lugar_busca = input("Digite o endereço do local que você deseja buscar: ").strip()
             situacao = alerta_busca_locais()
             print(lugar_busca + " - " + situacao)
-            lugar_e_situacao = {"Lugar buscado": lugar_busca, "Situação": situacao}
+            lugar_e_situacao = {"lugar_buscado": lugar_busca, "situacao": situacao}
             adicionar_ao_historico(lugar_e_situacao)
 
-        case 11:
-            mostrar_listas(historico_locais)
-
         case 12:
+            if len(historico_locais) == 0:
+                print("O histórico está vazio.")
+            else:
+                for hist in historico_locais:
+                    print("Lugar buscado:", hist['lugar_buscado'], "-", "Situação:", hist['situacao'])
+
+        case 13:
             print("Atualmente, você se encontra em: Avenida Paulista - Bela Vista, São Paulo - SP")
 
         case 0:
